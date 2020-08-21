@@ -1,10 +1,11 @@
-import { Controller, Get } from '@nestjs/common';
-import { Test } from '../app.post';
+import { Request, Response } from 'express';
+import { Controller, Post, Req, Res, HttpModule } from '@nestjs/common';
+
 @Controller('test')
 export class TestController {
-    constructor(private test:Test){}
-    @Get()
-    getTest():string{
-        return this.test.getTest();
+    @Post()
+    getTest(@Req() request:Request, @Res() response: Response):HttpModule{
+        console.log(request.body);
+        return response.json({message:"deu tudo certo"});
     }
 }
