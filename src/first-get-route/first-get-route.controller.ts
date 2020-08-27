@@ -1,5 +1,6 @@
+import { CreateCatDto } from './../classes/create-cat.dto';
 import { Request, Response } from 'express';
-import { Controller, Get, Req, HttpModule, Res, Param, ParamDecoratorEnhancer, Post } from '@nestjs/common';
+import { Controller, Get, Req, HttpModule, Res, Param, ParamDecoratorEnhancer, Post, Body } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 
 @Controller('get')
@@ -18,5 +19,11 @@ export class FirstGetRouteController {
     observable(@Param() params:ParamDecoratorEnhancer):Observable<number>{
 
         return of(params['id']);
+    }
+
+    @Post('/cat')
+    async createCat(@Body() createDTO: CreateCatDto):Promise<string>{
+        console.log(createDTO);
+        return 'gato criado';
     }
 }
