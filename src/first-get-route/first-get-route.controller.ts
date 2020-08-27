@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { Controller, Get, Req, HttpModule, Res, Param, ParamDecoratorEnhancer, Post } from '@nestjs/common';
+import { Observable, of } from 'rxjs';
 
 @Controller('get')
 export class FirstGetRouteController {
@@ -11,5 +12,11 @@ export class FirstGetRouteController {
     @Post('/teste')
     async findOne():Promise<string>{
         return 'teste';
+    }
+
+    @Get('observable:id')
+    observable(@Param() params:ParamDecoratorEnhancer):Observable<number>{
+
+        return of(params['id']);
     }
 }
